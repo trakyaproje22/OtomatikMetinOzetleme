@@ -1,6 +1,11 @@
 package textsummarization;
 
 public class Summarizing {
+	//********
+	//Burası pozitif kelimeler dizisi, yeni sayac eklemedim sendekinin ismiyle değiştirdim
+	private String[] PositiveWords= {"özetle","sonuçta","kısaca","kısacası","sonuç olarak","neticede", "en önemlisi"};
+	private String satir;
+	//********
 	private String[] stopWords = { "acaba", "ama", "ancak", "artık", "asla", "aslında", "az", "altmış", "altı", "arada",
 			"ayrıca", "bana", "bazen", "bazı", "bazıları", "bazısı", "belki", "ben", "beni", "benden", "beri", "benim",
 			"beş", "bile", "bin", "bir", "birçoğu", "birçok", "birçokları", "biri", "birisi", "birkaç", "birkaçı",
@@ -29,6 +34,118 @@ public class Summarizing {
 			"zira" };
 
 	private int[] counter = new int[stopWords.length];
+	
+	//**************Burası yeni eklenen yerler************
+	
+	
+	// Pozitif kelime kontrolü yapılmakta.
+	public void PositiveWord(String[][] Sentence) {
+		String[][] str = Sentence;
+		String[] word;
+
+		try {
+			
+			for (int i = 0; i < str.length; i++) {
+				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
+
+				for (int j = 0; j < word.length; j++)
+					for (int k = 0; k < PositiveWords.length; k++)
+						if (word[j].equals(PositiveWords[k]) && !word[j].equals(null))
+							counter[i] += 15;
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+
+		for (int i = 0; i < 100; i++) {
+			System.out.println("PositiveWord - " + i + " :" + counter[i]);
+		}
+	}
+	
+	//Baslikta geçen kelimelerin kontrolü
+	public void titleWords(String[][] Sentence) {
+	
+		String[][] str = Sentence;
+		String[] word;
+
+		String[] titleWords;
+		//Burada çift boyutlu dizide ki ilk cümleye ait olan kelimeleri başlık kelimesi olarak kabul ediyorum
+		for(int j=0;j<str.length;j++) {
+		    titleWords[j]+=str[0][j];
+		    
+		}
+		
+		try {
+			
+			for (int i = 0; i < str.length; i++) {
+				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
+
+				for (int j = 0; j < word.length; j++)
+					for (int k = 0; k < titleWords.length; k++)
+						if (word[j].equals(titleWords[k]) && !word[j].equals(null))
+							counter[i] += 20;
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+
+		for (int i = 0; i < 100; i++) {
+			System.out.println("TitleWord - " + i + " :" + counter[i]);
+		}
+	}
+	
+	//Sozluk okuma kısmını buraya aldım ama başka alternatifte düşünebiliriz
+	//Burada ki hata SozlukleriOkuya verilen String parametresini dizi olarak istemesi ama dizi yapamıyorum
+	private String[] SozcukleriOku(String str) throws IOException{
+		List<String> liste = new ArrayList <String>();
+		String[] dizi;
+		File dosya = new File(str);
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(dosya), "ISO-8859-9"));
+		while((satir = br.readLine()) != null){
+			liste.add(satir);	
+		}
+		
+		for(int i=0;i<liste.size();i++) {
+			dizi[i]=liste.get(i);
+		}
+		
+
+		br.close();
+		return dizi;
+	}
+	
+	public void ProperNoun(String[][] Sentence,String[] dictionary) {
+		String[][] str = Sentence;
+		String[] word;
+		String[] ProperNounDictionary = SozcukleriOku(dictionary);
+		
+
+		try {
+			
+			for (int i = 0; i < str.length; i++) {
+				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
+
+				for (int j = 0; j < word.length; j++)
+					for (int k = 0; k < dictionary.length; k++)
+						if (word[j].equals(dictionary[k]) && !word[j].equals(null))
+							counter[i] += 3;
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+
+		for (int i = 0; i < 100; i++) {
+			System.out.println("ProperNoun - " + i + " :" + counter[i]);
+		}
+			
+		}
+	//****************Burada son buluyor yaptıklarım****************
 
 	// ****
 	// Negatif kelime kontrolü yapılmaktadır.
