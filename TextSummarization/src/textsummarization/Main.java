@@ -71,11 +71,14 @@ public class Main extends JFrame {
 		JButton btnSummarization = new JButton("Özetle");
 		btnSummarization.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String dictionary=("Sözlük konumu neresiyse orayı yazınız");
 				if (!OrjinalTextArea.getText().equals("")) {
 					SM.SentencePosition(OrjinalTextArea.getText().toString());// Cümlenin konumunu kontrol ediliyor.
 					try {
 						SM.NegativeWord(SI.Cumle(OrjinalTextArea.getText().toString()));// Negatif kelime kontrol
-																						// ediliyor.
+						SM.PositiveWord(SI.Cumle(OrjinalTextArea.getText().toString()));//Pozitif kelime kontrol
+						SM.titleWords(SI.Cumle(OrjinalTextArea.getText().toString()));//Başlıkta geçen kelime kontrol
+						SM.ProperNoun(SI.Cumle(OrjinalTextArea.getText().toString()),dictionary);//Ozel isim kontol
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
