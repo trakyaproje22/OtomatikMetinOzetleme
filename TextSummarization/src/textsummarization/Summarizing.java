@@ -99,10 +99,10 @@ public class Summarizing {
 	}
 	
 	//Sozluk okuma kısmını buraya aldım ama başka alternatifte düşünebiliriz
-	//Burada ki hata SozlukleriOkuya verilen String parametresini dizi olarak istemesi ama dizi yapamıyorum
-	private String[] SozcukleriOku(String str) throws IOException{
+	//OzelIsımler sınıfında da kalabilir oradan çağırırız fonksiyonu
+	  public String[] SozlukOku(String str) throws IOException{
 		List<String> liste = new ArrayList <String>();
-		String[] dizi;
+		String[] dizi = new String[liste.size()];
 		File dosya = new File(str);
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(dosya), "ISO-8859-9"));
 		while((satir = br.readLine()) != null){
@@ -117,11 +117,21 @@ public class Summarizing {
 		br.close();
 		return dizi;
 	}
-	
-	public void ProperNoun(String[][] Sentence,String[] dictionary) {
+	//*****
+	//OzelIsım buldurma kısmında istediğimiz sozluk yolunu verip okutabiliriz organizasyon ,yer ismi
+	// ve ozel isim dahildir bu kısma
+	//sözlükler bende silinmiş mailden de bulamıyorum kontrolünü yapamadım ama hata vermiyor kodda.
+	public void ProperNoun(String[][] Sentence,String dictionary) {
 		String[][] str = Sentence;
-		String[] word;
-		String[] ProperNounDictionary = SozcukleriOku(dictionary);
+		String[] word=new String[str.length];
+		String[] sozluk=new String[str.length];
+		try {
+			sozluk = SozlukOku(dictionary);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		
 
 		try {
@@ -130,8 +140,8 @@ public class Summarizing {
 				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
 
 				for (int j = 0; j < word.length; j++)
-					for (int k = 0; k < dictionary.length; k++)
-						if (word[j].equals(dictionary[k]) && !word[j].equals(null))
+					for (int k = 0; k < sozluk.length; k++)
+						if (word[j].equals(sozluk[k]) && !word[j].equals(null))
 							counter[i] += 3;
 
 			}
