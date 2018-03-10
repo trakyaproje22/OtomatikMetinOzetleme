@@ -14,13 +14,9 @@ public class FileRW {
 
 	private String satir;
 	public List<String> lst = new ArrayList<String>();
-	// private int i,j;
 	private File dosya;
 
 	public String FileRead(String path) throws IOException {
-
-		// Zemberek zemberek = new Zemberek(new TurkiyeTurkcesi());
-
 		dosya = new File(path);
 
 		FileReader fr = new FileReader(dosya);
@@ -28,33 +24,11 @@ public class FileRW {
 
 		while ((satir = br.readLine()) != null) {
 			lst.add(satir);
-
-			// kelime = satir.split("( )|(\\.)|(\\')|(\\,)|(\\?)");
-			/*
-			 * for(i = 0; i < kelime.length; i++) liste.add(kelime[i]);
-			 */
 		}
-
-		/*
-		 * Kok Çıkarma
-		 * 
-		 * kok = new String[kelime.length*15];
-		 * 
-		 * satir = liste.toString(); kelime =
-		 * satir.split("( )|(\\.)|(\\')|(\\,)|(\\?)"); for(i = 0; i < kelime.length;
-		 * i++){ for(j = 0; j < stopWords.length; j++){
-		 * if(kelime[i].equals(stopWords[j])) kelime[i].replaceAll("\\s+",""); } }
-		 * 
-		 * for(j = 0; j < kelime.length; j++){ if(zemberek.kelimeDenetle(kelime[j]))
-		 * //Gelen Kelimenin kökünü hesaplama kok[j] =
-		 * zemberek.kelimeCozumle(kelime[j])[0].kok().icerik(); else kok[j] = kelime[j];
-		 * }
-		 */
 
 		String temp;
 		for (String list : lst) {
 			temp = list.toLowerCase();
-			// System.out.println(temp + "\n");
 		}
 
 		String text;

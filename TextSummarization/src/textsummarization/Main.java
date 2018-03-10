@@ -61,24 +61,21 @@ public class Main extends JFrame {
 
 		KeyTextField = new JTextField();
 		KeyTextField.setFont(new Font("Serif", Font.PLAIN, 17));
-		KeyTextField.setBounds(959, 5, 288, 27);
+		KeyTextField.setBounds(910, 5, 352, 27);
 		KeyTextField.setColumns(10);
 
 		JLabel lblAnahtarKelimeler = new JLabel("Anahtar Kelimeler");
-		lblAnahtarKelimeler.setBounds(800, 2, 147, 27);
+		lblAnahtarKelimeler.setBounds(751, 4, 147, 27);
 		lblAnahtarKelimeler.setFont(new Font("Serif", Font.PLAIN, 20));
 
 		JButton btnSummarization = new JButton("Özetle");
 		btnSummarization.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String dictionary=("Sözlük konumu neresiyse orayı yazınız");
 				if (!OrjinalTextArea.getText().equals("")) {
 					SM.SentencePosition(OrjinalTextArea.getText().toString());// Cümlenin konumunu kontrol ediliyor.
 					try {
 						SM.NegativeWord(SI.Cumle(OrjinalTextArea.getText().toString()));// Negatif kelime kontrol
-						SM.PositiveWord(SI.Cumle(OrjinalTextArea.getText().toString()));//Pozitif kelime kontrol
-						SM.titleWords(SI.Cumle(OrjinalTextArea.getText().toString()));//Başlıkta geçen kelime kontrol
-						SM.ProperNoun(SI.Cumle(OrjinalTextArea.getText().toString()),dictionary);//Ozel isim kontol
+																						// ediliyor.
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -94,13 +91,16 @@ public class Main extends JFrame {
 
 					// Özetleme işlemi gerçekleştirilecektir.
 					SummarizationTextArea.setText("");
-					// String str = SM.SortignSentence(OrjinalTextArea.getText().toString());
-
+					String[] str = SM.SortignSentence(OrjinalTextArea.getText().toString()).split("(, ,)|(null)");
+					for(int i = 0; i < str.length; i++)
+						SummarizationTextArea.append(str[i]);
+					
+					
 				}
 
 			}
 		});
-		btnSummarization.setBounds(552, 227, 133, 58);
+		btnSummarization.setBounds(545, 273, 194, 58);
 		btnSummarization.setFont(new Font("Serif", Font.PLAIN, 17));
 
 		JButton btnFileRead = new JButton("Dosyadan Oku");
@@ -138,7 +138,7 @@ public class Main extends JFrame {
 				SummarizationTextArea.setText("");
 			}
 		});
-		btnClear.setBounds(1123, 622, 124, 50);
+		btnClear.setBounds(1138, 622, 124, 50);
 		btnClear.setFont(new Font("Serif", Font.PLAIN, 17));
 
 		contentPane.setLayout(null);
@@ -150,16 +150,16 @@ public class Main extends JFrame {
 
 		JLabel OrjinalTextLabel = new JLabel("Orjinal Metin");
 		OrjinalTextLabel.setFont(new Font("Serif", Font.PLAIN, 22));
-		OrjinalTextLabel.setBounds(170, 42, 163, 27);
+		OrjinalTextLabel.setBounds(201, 45, 163, 27);
 		contentPane.add(OrjinalTextLabel);
 
 		JLabel TextSummarizationLabel = new JLabel("Özet Metin");
 		TextSummarizationLabel.setFont(new Font("Serif", Font.PLAIN, 22));
-		TextSummarizationLabel.setBounds(975, 45, 163, 27);
+		TextSummarizationLabel.setBounds(959, 45, 163, 27);
 		contentPane.add(TextSummarizationLabel);
 
 		JScrollPane OrjinalTextScrollPane = new JScrollPane();
-		OrjinalTextScrollPane.setBounds(22, 82, 455, 536);
+		OrjinalTextScrollPane.setBounds(22, 85, 511, 536);
 		contentPane.add(OrjinalTextScrollPane);
 
 		OrjinalTextArea = new JTextArea();
@@ -169,13 +169,13 @@ public class Main extends JFrame {
 		OrjinalTextArea.setWrapStyleWord(true);
 
 		JScrollPane SummarizationTextScrollPane = new JScrollPane();
-		SummarizationTextScrollPane.setBounds(800, 82, 450, 536);
+		SummarizationTextScrollPane.setBounds(751, 85, 511, 536);
 		contentPane.add(SummarizationTextScrollPane);
-
-		SummarizationTextArea = new JTextArea();
-		SummarizationTextArea.setFont(new Font("Serif", Font.PLAIN, 17));
-		SummarizationTextScrollPane.setViewportView(SummarizationTextArea);
-		SummarizationTextArea.setLineWrap(true);
+		
+				SummarizationTextArea = new JTextArea();
+				SummarizationTextScrollPane.setViewportView(SummarizationTextArea);
+				SummarizationTextArea.setFont(new Font("Serif", Font.PLAIN, 17));
+				SummarizationTextArea.setLineWrap(true);
 
 	}
 }

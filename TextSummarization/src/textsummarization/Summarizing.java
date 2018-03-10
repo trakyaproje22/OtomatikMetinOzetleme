@@ -1,11 +1,22 @@
 package textsummarization;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.zemberek.erisim.Zemberek;
+import net.zemberek.tr.yapi.TurkiyeTurkcesi;
+
 public class Summarizing {
-	//********
-	//Burası pozitif kelimeler dizisi, yeni sayac eklemedim sendekinin ismiyle değiştirdim
-	private String[] PositiveWords= {"özetle","sonuçta","kısaca","kısacası","sonuç olarak","neticede", "en önemlisi"};
+	// ********
+	// Burası pozitif kelimeler dizisi, yeni sayac eklemedim sendekinin ismiyle
+	// değiştirdim
+	private String[] PositiveWords = { "özetle", "sonuçta", "kısaca", "kısacası", "sonuç olarak", "neticede",
+			"en önemlisi" };
 	private String satir;
-	//********
+	// *****
 	private String[] stopWords = { "acaba", "ama", "ancak", "artık", "asla", "aslında", "az", "altmış", "altı", "arada",
 			"ayrıca", "bana", "bazen", "bazı", "bazıları", "bazısı", "belki", "ben", "beni", "benden", "beri", "benim",
 			"beş", "bile", "bin", "bir", "birçoğu", "birçok", "birçokları", "biri", "birisi", "birkaç", "birkaçı",
@@ -33,18 +44,17 @@ public class Summarizing {
 			"yaptığı", "yaptığını", "yaptıkları", "yedi", "yerine", "yetmiş", "yine", "yirmi", "yoksa", "yüz", "zaten",
 			"zira" };
 
-	private int[] counter = new int[stopWords.length];
-	
-	//**************Burası yeni eklenen yerler************
-	
-	
+	public int[] counter = new int[stopWords.length];
+
+	// **************Burası yeni eklenen yerler************
+
 	// Pozitif kelime kontrolü yapılmakta.
 	public void PositiveWord(String[][] Sentence) {
 		String[][] str = Sentence;
 		String[] word;
 
 		try {
-			
+
 			for (int i = 0; i < str.length; i++) {
 				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
 
@@ -63,22 +73,25 @@ public class Summarizing {
 			System.out.println("PositiveWord - " + i + " :" + counter[i]);
 		}
 	}
-	
-	//Baslikta geçen kelimelerin kontrolü
+
+	// Baslikta geçen kelimelerin kontrolü
+
+	String[] titleWords = new String[stopWords.length];
+
 	public void titleWords(String[][] Sentence) {
-	
+
 		String[][] str = Sentence;
 		String[] word;
 
-		String[] titleWords;
-		//Burada çift boyutlu dizide ki ilk cümleye ait olan kelimeleri başlık kelimesi olarak kabul ediyorum
-		for(int j=0;j<str.length;j++) {
-		    titleWords[j]+=str[0][j];
-		    
+		// Burada çift boyutlu dizide ki ilk cümleye ait olan kelimeleri başlık kelimesi
+		// olarak kabul ediyorum
+		for (int j = 0; j < str.length; j++) {
+			titleWords[j] += str[0][j];
+
 		}
-		
+
 		try {
-			
+
 			for (int i = 0; i < str.length; i++) {
 				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
 
@@ -97,34 +110,36 @@ public class Summarizing {
 			System.out.println("TitleWord - " + i + " :" + counter[i]);
 		}
 	}
-	
-	//Sozluk okuma kısmını buraya aldım ama başka alternatifte düşünebiliriz
-	//OzelIsımler sınıfında da kalabilir oradan çağırırız fonksiyonu
-	  public String[] SozlukOku(String str) throws IOException{
-		List<String> liste = new ArrayList <String>();
+
+	// Sozluk okuma kısmını buraya aldım ama başka alternatifte düşünebiliriz
+	// OzelIsımler sınıfında da kalabilir oradan çağırırız fonksiyonu
+	public String[] SozlukOku(String str) throws IOException {
+		List<String> liste = new ArrayList<String>();
 		String[] dizi = new String[liste.size()];
 		File dosya = new File(str);
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(dosya), "ISO-8859-9"));
-		while((satir = br.readLine()) != null){
-			liste.add(satir);	
-		}
-		
-		for(int i=0;i<liste.size();i++) {
-			dizi[i]=liste.get(i);
-		}
-		
-
-		br.close();
+		// BufferedReader br = new BufferedReader(new InputStreamReader(new
+		// FileInputStream(dosya), "ISO-8859-9"));
+		/*
+		 * while((satir = br.readLine()) != null){ liste.add(satir); }
+		 * 
+		 * for(int i=0;i<liste.size();i++) { dizi[i]=liste.get(i); }
+		 * 
+		 * 
+		 * br.close();
+		 */
 		return dizi;
 	}
-	//*****
-	//OzelIsım buldurma kısmında istediğimiz sozluk yolunu verip okutabiliriz organizasyon ,yer ismi
+
+	// *****
+	// OzelIsım buldurma kısmında istediğimiz sozluk yolunu verip okutabiliriz
+	// organizasyon ,yer ismi
 	// ve ozel isim dahildir bu kısma
-	//sözlükler bende silinmiş mailden de bulamıyorum kontrolünü yapamadım ama hata vermiyor kodda.
-	public void ProperNoun(String[][] Sentence,String dictionary) {
+	// sözlükler bende silinmiş mailden de bulamıyorum kontrolünü yapamadım ama hata
+	// vermiyor kodda.
+	public void ProperNoun(String[][] Sentence, String dictionary) {
 		String[][] str = Sentence;
-		String[] word=new String[str.length];
-		String[] sozluk=new String[str.length];
+		String[] word = new String[str.length];
+		String[] sozluk = new String[str.length];
 		try {
 			sozluk = SozlukOku(dictionary);
 		} catch (IOException e1) {
@@ -132,10 +147,8 @@ public class Summarizing {
 			e1.printStackTrace();
 		}
 
-		
-
 		try {
-			
+
 			for (int i = 0; i < str.length; i++) {
 				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
 
@@ -153,15 +166,15 @@ public class Summarizing {
 		for (int i = 0; i < 100; i++) {
 			System.out.println("ProperNoun - " + i + " :" + counter[i]);
 		}
-			
-		}
-	//****************Burada son buluyor yaptıklarım****************
+
+	}
+	// ****************Burada son buluyor yaptıklarım****************
 
 	// ****
 	// Negatif kelime kontrolü yapılmaktadır.
 	public void NegativeWord(String[][] Sentence) {
 		String[][] str = Sentence;
-		String[] word;
+		String[] word = new String[100];
 
 		try {
 			// Gelen çift boyutlu diziyi bir string değişkenine atadık.
@@ -179,25 +192,51 @@ public class Summarizing {
 			System.out.println(e.getMessage());
 		}
 
-		for (int i = 0; i < 100; i++) {
-			System.out.println("NegativeWord - " + i + " :" + counter[i]);
-		}
+		// for (int i = 0; i < 100; i++) {
+		// System.out.println( i + "- NegativeWord - " + str[i][0] +" :" + counter[i]);
+		// }
+
 	}
 
 	// ****
 	// Eğer anahtar kelimler girilirse ona göre puan değerleri atanıyor.
 	public void KeyWord(String[][] Sentence, String key) {
-		String[] decomposition = key.split(",");
+		// Zemberek zemberek = new Zemberek(new TurkiyeTurkcesi());
+
+		ArrayList<String> list = new ArrayList<>();
+
+		list.add(key);
+
+		for (String lst : list) {
+			key = lst.toLowerCase();
+		}
+
+		String[] KeyWord = key.split(",");
 		String[][] str = Sentence;
 		String[] word;
 
-		// Burada kelimelerin kökünü alınacak mı ??
+		/*
+		 * String[] KeyWordRoot = new String[KeyWord.length];
+		 * 
+		 * for (int j = 0; j < KeyWord.length; j++) { if
+		 * (zemberek.kelimeDenetle(KeyWord[j])) KeyWordRoot[j] =
+		 * zemberek.kelimeCozumle(KeyWord[j])[0].kok().icerik(); else KeyWordRoot[j] =
+		 * KeyWord[j]; }
+		 */
+
 		try {
 			for (int i = 0; i < str.length; i++) {
 				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
-				for (int j = 0; j < str[i].length; j++) {
-					for (int k = 0; k < decomposition.length; k++)
-						if (word[j].equals(decomposition[k]) && !word[j].equals(null))
+				/*
+				 * String[] wordRoot = new String[word.length]; for (int j = 0; j < word.length;
+				 * j++) { if (zemberek.kelimeDenetle(word[j])) wordRoot[j] =
+				 * zemberek.kelimeCozumle(word[j])[0].kok().icerik(); else wordRoot[j] =
+				 * KeyWord[j]; }
+				 */
+
+				for (int j = 0; j < word.length; j++) {
+					for (int k = 0; k < KeyWord.length; k++)
+						if (word[j].equals(KeyWord[k]) && !word[j].equals(null))
 							counter[i] += 8;
 				}
 			}
@@ -207,9 +246,10 @@ public class Summarizing {
 			System.out.println(e.getMessage());
 		}
 
-		for (int i = 0; i < 100; i++) {
-			System.out.println("KeyWord - " + i + " :" + counter[i]);
-		}
+		/*
+		 * for (int i = 0; i < 100; i++) { System.out.println("KeyWord - " + i + " :" +
+		 * counter[i]); }
+		 */
 	}
 
 	// ****
@@ -238,36 +278,17 @@ public class Summarizing {
 			counter[i] += 10;
 		}
 
-		for (int i = 0; i < 100; i++) {
-			System.out.println("SentencePosition - " + i + " :" + counter[i]);
-		}
-
-	}
-
-	// *****
-	// Burda her cümlenin puanına bakılarak özet e eklenecek olan cümle
-	// belirlencektir.
-	// Burası henüz denenmedi, kontroller yapıldıktan sonra tekrar düzeltmeler
-	// yapılabilir.
-	public String SortignSentence(String Sentence) {
-
-		String[] paragraph;
-		String str = null;
-
-		paragraph = Sentence.split("(, ,)|(\\[)|(\\])|(\\.)");
-		for (int i = 0; i < counter.length; i++) {
-			if (counter[i] > 0) {
-				str = paragraph[i] + " ";
-			}
-		}
-
-		return str;
+		/*
+		 * for (int i = 0; i < 100; i++) { System.out.println("SentencePosition - " + i
+		 * + " :" + counter[i]); }
+		 */
 
 	}
 
 	// YENİ EKLENEN YERLER //
-	
-	// burada noktalama işaretlerine göre puanlama yapılıyor(kelimenin sonunda soru veya ünlem işareti varsa +2 puan veriliyor)
+
+	// burada noktalama işaretlerine göre puanlama yapılıyor(kelimenin sonunda soru
+	// veya ünlem işareti varsa +2 puan veriliyor)
 	public void PunctuationPointing(String[][] Sentence) {
 		String[][] str = Sentence;
 		String[] word;
@@ -278,7 +299,8 @@ public class Summarizing {
 
 				for (int j = 0; j < word.length; j++)
 					for (int k = 0; k < stopWords.length; k++)
-						if (((word[j].substring(word[j].length()-1) == "?") || (word[j].substring(word[j].length()-1) == "!" )) && !word[j].equals(null))
+						if (((word[j].substring(word[j].length() - 1) == "?")
+								|| (word[j].substring(word[j].length() - 1) == "!")) && !word[j].equals(null))
 							counter[i] += 2;
 
 			}
@@ -291,8 +313,9 @@ public class Summarizing {
 			System.out.println("SpecialPunctuation - " + i + " :" + counter[i]);
 		}
 	}
-	
-	// çift tırnağa göre puanlama(kelimenin sonunda veya başında tırnak işareti varsa +1 puan veriliyor, 
+
+	// çift tırnağa göre puanlama(kelimenin sonunda veya başında tırnak işareti
+	// varsa +1 puan veriliyor,
 	// böylece algoritma 2 kelime bulduğunda toplamda +2 puan veriyor)
 	public void QuotationPointing(String[][] Sentence) {
 		String[][] str = Sentence;
@@ -304,7 +327,8 @@ public class Summarizing {
 
 				for (int j = 0; j < word.length; j++)
 					for (int k = 0; k < stopWords.length; k++)
-						if (((word[j].substring(word[j].length()-1) == "\"") || (word[j].substring(0,1) == "\"" )) && !word[j].equals(null))
+						if (((word[j].substring(word[j].length() - 1) == "\"") || (word[j].substring(0, 1) == "\""))
+								&& !word[j].equals(null))
 							counter[i] += 1;
 
 			}
@@ -317,6 +341,7 @@ public class Summarizing {
 			System.out.println("Quote - " + i + " :" + counter[i]);
 		}
 	}
+
 	// tarih puanlandırması
 	// kelimede 2 adet . veya / geçiyorsa tarih sayıyor
 	// ay isimleri içinde bir değerlendirme yapılması gerekecek
@@ -331,7 +356,9 @@ public class Summarizing {
 
 				for (int j = 0; j < word.length; j++)
 					for (int k = 0; k < stopWords.length; k++)
-						if (((word[j].length() - word[j].replace(".", "").length() == 2) || (word[j].length() - word[j].replace("/", "").length() == 2)) && !word[j].equals(null))
+						if (((word[j].length() - word[j].replace(".", "").length() == 2)
+								|| (word[j].length() - word[j].replace("/", "").length() == 2))
+								&& !word[j].equals(null))
 							counter[i] += 1;
 
 			}
@@ -344,4 +371,25 @@ public class Summarizing {
 			System.out.println("Date - " + i + " :" + counter[i]);
 		}
 	}
+
+	// *****
+	// Burda her cümlenin puanına bakılarak özet e eklenecek olan cümle
+	// belirlencektir.
+	public String SortignSentence(String Sentence) {
+
+		String[] paragraph = new String[100];
+		String str = null;
+
+		paragraph = Sentence.split("(\\.)");
+
+		for (int i = 0; i < counter.length; i++) {
+			if (counter[i] > 0) {
+				str += paragraph[i] + " .";
+			}
+		}
+
+		return str;
+
+	}
+
 }

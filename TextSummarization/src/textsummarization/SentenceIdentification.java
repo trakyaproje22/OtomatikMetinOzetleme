@@ -11,7 +11,6 @@ public class SentenceIdentification {
 	// private String satir;
 	// private String ImlecAyrac = "?!.";
 	// private String StringAyrac = "ABCDEFGHIJKLMNOPRSTUVYZabcdefghijklmnoprstuvyz
-	// \",]";
 
 	public List<String> list = new ArrayList<String>();
 
