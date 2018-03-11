@@ -16,6 +16,141 @@ public class Summarizing {
 	private String[] PositiveWords = { "özetle", "sonuçta", "kısaca", "kısacası", "sonuç olarak", "neticede",
 			"en önemlisi" };
 	private String satir;
+	
+	//KisiSözlugunu diziye çevirdim hala da devam etmekteyim eklemeleri yapıcam 
+	//Aynı şekilde organizasyon ve yer isimleri içinde yapıyorum
+	//Sizce hepsi bir dizide mi olsun ayrı dizide mi??
+	private String[] KisiSozlugu= {"Ladin","Usame","Richard Holbrooke","Timothy Garton Ash","Charles de Gaulle","Ferid Zekeriya","Giscard","Dominique Moisi",
+			"Baykal","Uğur Dündar","Neşe Düzel","Mehmet Ali Talat","Sami KohenKemal Derviş","Baykal","Şükrü Sina Gürel","Ali Coşkun",
+			"Nelson Mandela","Makarios","Demirel","Erbakan","Doğan Avcıoğlu","Uluç Gürkan","Şahin Alpay","Gorbaçov","Memet Fuat",
+			"Nazım Hikmet","Mümtaz Soysal","Necip Hablemitoğlu","Abdullah Gül","erdem beyaz","Megi","megi berberi","Tayyip","Gül",
+			"Tayyip Erdogan","Ricard Haass","Yoshinori Imai","Dani Rodrik","Mandela","Atatürk","Tayyip","Özal","Annan","Demirel","Ecevit",
+			"Kofi Annan","Bahçeli","Colin Powell","Elif Melike Demir","Demet Şen","hasan cemal","ABİDE","AÇELYA","ADALET","ADİLE","AFET",
+			"AFİFE","AFİTAP","AFŞAR","AHSEN","AHU","AJDA","AKASYA","AKGÜL","AKGÜN","AKİFE","ALARA","ALARCIN","ALÇİN","ALEV","ALEYNA","ALİYE","ALTAN",
+			"ALTIN","ANDAÇ","ARİFE","ARZU","ASENA","ASİYE","ASLI","ASLIHAN","ASRIN","ASU","ASUDE","ASUMAN","ASYA","AŞKIN","ATEŞ","ATIFET","ATİKE","AYBEL"
+			,"AYBEN","AYBÜKE","AYCA","AYCAN","AYÇA","AYÇİN","AYDA" ,"AYDAN","AYDİL","AYFER","AYGEN","AYGÜL","AYLA ","AYLİN","AYNUR","AYPARE"
+			,"AYSEL","AYSEN","AYSU" ,"AYSUN","AYŞAN","AYŞE","AYŞEGÜL","AYŞEM","AYŞEN","AYŞENUR","AYŞİN","AYTAÇ","AYTEN","AYTÜL","AZİME","AZİZE","AZMİYE"
+			,"AZRA","ABAY","ABBAS","ABDULLAH","ABİDİN","ACUN","ADEM","ADİL","ADNAN","AFFAN","AGAH","AHMET","AKAD","AKAY","AKEL","AKGÜN","AKIN","AKİF","AKİL"
+			,"AKTAÇ","AKTAN","ALAADDİN","ALDEMİR","ALİ","ALİCAN","ALİM","ALİŞAN","ALKAN","ALKIN","ALP","ALPAR","ALPASLAN","ALPAY","ALPER","ALPHAN"
+			,"ALPTEKİN","ALTAN","ALTAY","ALTUĞ","ANDAÇ","ANIL","ARAL","ARAS","ARCAN","ARDA","AREL","ARGÜN","ARIKAN","ARIN","ARİF","ARKAN","ARMAĞAN"
+			,"ARMAN","ARSLAN","ARTAÇ","ASIM","ASİL","ASLAN","ASRIN","ASUTAY","AŞKIN","ATA","ATABEK","ATABEY","ATACAN ","ATAHAN","ATAK","ATAKAN","ATALAY"
+			,"ATAMAN","ATANUR","ATASOY","ATAY","ATEŞ","ATIF","ATIL","ATILAY","ATALAY","ATILGAN","ATINÇ","ATİLLA","ATTİLA","ATLIHAN","AVNİ"
+			,"AYBAR","AYBARS","AYBERK","AYDEMİR","AYDIN","AYGÜN","AYHAN","AYKAN","AYKUT","AYTAÇ","AYTEK","AYTEKİN","AYTUNÇ","AYYÜCE","AZER","AZİM"
+			,"AZİZ","AZMİ","BAHAR","BAHRİYE","BALCA","BALIM","BANU","BARAN","BAŞAK","BAŞAR","BEDİA","BEDİHE","BEDRİYE","BEGÜM","BEHİCE","BEHİRE"
+			,"BEHİYE","BELGİN","BELİN","BELKIS","BELMA","BENAN","BENGİ","BENGİSU","BENGÜ","BENGÜL","BENİAN","BENSU","BERAY","BERFİN","BERİA"
+			,"BERİL","BERİN","BERNA","BERRA","BERRAK","BERRİN","BERŞAN","BESTE","BESTEGÜL","BETİGÜN","BETİL","BETÜL","BEYHAN","BEYZA"
+			,"BİHTER","BİKE","BİKEM","BİLGE","BİLLUR","BİLUN","BİNGÜL","BİNNAZ","BİNNUR","BİRCAN","BİRCE","BİRGÜL","BİRİCİK","BİRSEN","BİRSU","BUCAK"
+			,"BUKET","BURCU","BURÇAK" ,"BURÇİN","BUSE","BÜŞRA","BABÜR","BAHA","BAHADIR","BAHATTİN","BAHİR","BAHRİ","BAHTİYAR","BAKİ","BALA","BALABAN"
+			,"BALER","BARAN","BARANSEL","BARBAROS","BARIN","BARIŞ","BARKAN","BARKIN","BARLAS","BARS","BASRİ","BAŞAR","BAŞER","BATI","BATIHAN","BATIKAN"
+			,"BATIRAY","BATTAL","BATU","BATUHAN","BATUR","BATURALP","BAYAR","BAYBARS","BAYBORA","BAYCAN","BAYEZİT","BEYAZIT","BAYHAN","BAYKAL"
+			,"BAYRAKTAR","BAYRAM","BAYSAL","BAYÜLKEN","BEDİR","BEDİRHAN","BEDRETTİN","BEDRİ","BEHÇET","BEHİÇ","BEHLÜL","BEHRAM","BEHZAT","BEKİ"
+			,"BEKRİ","BEKİR","BEKTAŞ","BERAT","BERHAN","BERK","BERKAN","BERKANT","BERKAY","BERKE","BERMAL","BESİM","BİLAL","BİLGE","BİLGEHAN","BİLGİN"
+			,"BİRANT","BİRCAN","BİROL","BOĞAÇ","BOĞAÇHAN","BORA","BORAN","BOZKURT","BUĞRA","BUĞRAHAN","BULUT","BUMİN","BURAK","BURÇ","BURÇAK","BURÇİN"
+			,"BURHAN","BURHANETTİN","BÜLENT","BÜNYAMİN","CAHİDE ","CANAN","CANDAN","CANEL","CANKAT","CANSEL","CANSIN","CANSU","CAVİDAN","CELİLE"
+			,"CEMİLE","CEMRE","CENNET","CEREN","CEVHER","CEVRİYE","CEYDA","CEYLA","CEYLAN","CEYLİN","CİHAN","CİHANNUR","CİLVENAZ","ÇAĞLA","ÇAĞLAYAN"
+			,"ÇAĞRI","ÇİÇEK","ÇİĞDEM","ÇİLAY","ÇİLER","ÇİSEM","ÇOLPAN","CABBAR","CAFER","CAHİT","CAN","CANALP","CANBERK","CANDAŞ","CANDEMİR","CANDOĞAN"
+			,"CANEL","CANER","CANKAT","CANKUT","CANSIN","CANTEKİN","CAVİT","CELAL","CELALETTİN","CELAYİR","CELİL","CEM","CEMAL","CEMALETTİN","CEMİL"
+			,"CEMRE","CENAN","CENAP","CENGİZ","CENGİZHAN","CENK","CEVAHİR","CEVAT","CEVDET","CEYHAN","CEYHUN","CEZMİ","CİHAN","CİHANGİR","CİHAT","CİVAN"
+			,"COŞAR","COŞKU","COŞKUN","CUMA","CUMHUR","CÜNEYT","ÇAĞAN","ÇAĞATAY","ÇAĞDAŞ","ÇAĞIN","ÇAĞLAR","ÇAĞMAN","ÇAĞRI","ÇAKABEY","ÇAKAR","ÇAKIN"
+			,"ÇAKIR","ÇAVUŞ","ÇELEBİ","ÇELEN","ÇELİK","ÇELİKER","ÇETİN","ÇEVİK","ÇEVRİM","ÇIĞIR","ÇINAR","DAMLA","DEFNE","DELFİN","DEMET","DENİZ","DEREN"
+			,"DERİN","DERYA","DESTAN","DESTE","DEVRAN","DİBA","DİCLE","DİCLEHAN","DİDE","DİDEM","DİLAN","DİLARA","DİLAY","DİLBERAN","DİLBERAY","DİLDAR"
+			,"DİLEK","DİLER","DİLHAN","DİLRUBA","DİLŞAD","DOLUNAY","DÖNDÜ","DURU","DUYGU","DÜNYA","DÜRDANE","DÜRRİYE","DALAN","DALAY","DANİŞ","DARCAN","DAVUT"
+			,"DEHA","DEMİR","DEMİRALP","DEMİRCAN","DEMİREL","DEMİRHAN","DEMİRKAN","DENİZ","DENİZHAN","DENKTAŞ","DERİN","DERVİŞ","DERYA","DEVLET"
+			,"DEVRAN","DEVRİM","DİLAVER","DİLMEN","DİNÇ","DİNÇER","DOĞA","DOĞAN","DOĞU","DOĞUHAN","DOĞUKAN","DOĞUŞ","DORUK","DORUKHAN","DURAN","DURMUŞ"
+			,"DURSUN","DURUKAN","DURUL","DUYAL","DÜNDAR","DÜNYA","EBRU","ECE","ECEHAN","ECEM","EDA","EDİBE","EDİS","EFSER","EFTALYA ","EGE","EKİM","EKİN"
+			,"ELA","ELÇİN","ELİF","ELMAS","ELVAN","EMEL","EMİNE","ENGİN","ENİSE","ERDEN","ERGÜL","ERTAÇ","ESEN","ESER","ESİN","ESMA","ESMERAY","ESRA","EVREN"
+			,"EVRİM","EVŞEN","EYLEM","EYLÜL","EYŞAN","EZGİ","EZRA","ECEVİT","EDİP","EDİZ","EFDAL","EFTAL","EFE","EFGAN","EFLATUN","EGE","EGEMEN","EJDER","EKBER"
+			,"EKİN","EKREM","ELDEM","ELVAN","EMİN","EMİR","EMİRHAN","EMRAH","EMRE","EMRULLAH","ENDER","ENER","ENGİN","ENGİNSU","ENİS","ENSAR","ENVER","ERALP"
+			,"ERAY","ERBATUR","ERBERK","ERCAN","ERCE","ERCÜMENT","ERÇİN","ERDAL","ERDEM","ERDEN","ERDİNÇ","ERDOĞAN","EREM","EREN","ERENAY","ERGİN","ERGUN"
+			,"ERGÜN","ERHAN","ERHUN","ERİM","ERİNÇ","ERKAL","ERKAN","ERKİN","ERKUT","ERMAN","EROL","ERSAN","ERSEN","ERSİN","ERŞAT","ERTAÇ","ERTAN","ERTEM"
+			,"ERTEN","ERTUĞRUL","ERYAMAN","ESAT","ESEN","ESER","EŞREF","EVGİN","EVREN","EVRİM","EYÜP","EZEL","FADİK","FADİME","FADİŞ","FAHİRE" ,"FAHRİYE"
+			,"FAHRÜNİSSA","FATMA","FATMANUR","FATOŞ","FAZİLET","FEHİME","FERAH","FERAY","FERAYE","FERDA","FERHAN","FERHUNDE","FERİDE","FERİHA"
+			,"FERZAN","FEVZİYE","FEYMAN","FEYZA","FEZA","FİDAN","FİGEN","FİKRET","FİKRİYE","FİLİZ","FİRDEVS","FİRUZE","FULDEM","FULDEN","FULYA","FUNDA"
+			,"FÜREYYA","FÜRUZAN","FÜSUN","FADIL","FAHİR","FAHRETTİN","FAHRİ","FAİK","FAKİR","FALİH","FARUK","FATİH","FAZIL","FEHİM","FERDİ","FERHAN","FERHAT"
+			,"FERİD","FERİDUN","FERİT","FERKAN","FERRUH","FETHİ","FEVZİ","FEYYAZ","FEYZİ","FEYZULLAH","FEZA","FIRAT","FİKRET","FİKRİ","FUAT","FURKAN"
+			,"GAMZE","GAYE","GAZAL","GENCAY","GİZEM","GONCA","GÖKBEN","GÖKÇE","GÖKÇEN","GÖKNİL","GÖKNUR","GÖKSU","GÖKŞİN","GÖNÜL","GÖRKEM","GÖZDE","GÜHER"
+			,"GÜL","GÜLAY","GÜLBAHAR","GÜLBEN","GÜLBİN","GÜLBİZ","GÜLCAN","GÜLÇİN","GÜLDEM","GÜLDEN","GÜLDEREN","GÜLDESTE","GÜLEN","GÜLENDAM","GÜLER"
+			,"GÜLFEM","GÜLFİDAN","GÜLGÜN","GÜLHANIM","GÜLİN","GÜLİSTAN","GÜLİZ","GÜLİZAR","GÜLLÜ","GÜLNAZ","GÜLNİHAL","GÜLNUR","GÜLPEMBE","GÜLRİZ","GÜLSELİ"
+			,"GÜLSEN","GÜLSEREN","GÜLSOY","GÜLSÜM","GÜLSÜN","GÜLŞAH","GÜLŞEN","GÜLTEN","GÜLÜMSER","GÜN","GÜNAL","GÜNER","GÜNEŞ","GÜNGÖR","GÜNİZ","GÜNNUR"
+			,"GÜNSEL","GÜNSELİ","GÜRCAN","GÜVEN","GÜZİDE","GÜZİN","GAFFAR","GAFUR","GALİP","GANİ","GARİP","GAZANFER","GAZİ","GEDİZ","GENCAL","GENCALP"
+			,"GENCAY","GENCER","GENCO","GİRAY","GİRGİN","GÖKALP","GÖKAY","GÖKBERK","GÖKCAN","GÖKÇE","GÖKÇEN","GÖKER","GÖKHAN","GÖKHUN","GÖKMEN"
+			,"GÖKSEL","GÖKTAN","GÖKTUĞ","GÖKTÜRK","GÜÇHAN","GÜÇLÜ","GÜLHAN","GÜLTEKİN","GÜNALP","GÜNAY","GÜNDOĞDU","GÜNDÜZ","GÜNER","GÜNERİ","GÜNEŞ"
+			,"GÜNEY","GÜNGÖR","GÜNHAN","GÜNSEL","GÜNSER","GÜNTAN","GÜNTEKİN","GÜRAL","GÜRALP","GÜRAY","GÜRBÜZ","GÜRCAN","GÜREL","GÜRKAN","GÜROL","GÜRSEL"
+			,"GÜRSOY","GÜRTAN","GÜVEN","GÜVENÇ","GÜZEY","HABİBE","HACER","HAFİZE","HALE","HALENUR","HALİDE","HALİME","HAMİDE","HAMİYET","HANDAN","HANDE"
+			,"HANIM","HANİFE","HARİKA","HASİBE","HASRET","HATIRA","HATİCE","HAVVA","HAYAL","HAYAT","HAYRİYE","HAYRÜNİSSA","HAZAL","HAZAN","HAZER","HEDİYE"
+			,"HİCRAN","HİLAL","HURİ","HURİYE","HÜLYA","HÜMEYRA","HÜNER","HÜRMÜZ","HÜRREM","HÜRRİYET","HÜSNİYE","HABİB","HACI","HAFIZ","HAKAN","HAKKI"
+			,"HALDUN","HALİL","HALİM","HALİS","HALİT","HALUK","HAMDİ","HAMDULLAH","HAMİ","HAMİT","HAMZA","HANEFİ","HARUN","HASAN","HASİP","HASBİ","HASRET"
+			,"HAŞİM","HAŞMET","HATAY","HATEM","HATEMİ","HAYATİ","HAYDAR","HAYRETTİN","HAYRİ","HAYRULLAH","HAZAR","HAZIM","HEYBET","HIFZI","HINCAL","HIZIR"
+			,"HİCRİ","HİDAYET","HİKMET","HİLMİ","HİMMET","HİRAM","HİŞAM","HULKİ","HULUSİ","HURŞİT","HÜDAVERDİ","HÜRAY","HÜRKAN","HÜSAM","HÜSAMETTİN"
+			,"HÜSEYİN","HÜSMEN","HÜSNÜ","HÜSREV","ILGAZ","ILGIN","IRMAK","IŞIK","IŞIL","IŞILAY","IŞILTI","IŞIN","ITIR","İCLAL","İDİL","İFFET","İKBAL","İLAYDA"
+			,"İLCAN","İLGİN","İLHAN","İLKAY","İLKBEN","İLKCAN","İLKE","İLKİN","İLKNUR","İLKSEN","İLKYAZ","İLSU","İLTER","İMGE","İMRAN","İMREN","İNCİ","İNCİNUR"
+			,"İPEK","İREM","İSMİHAN","İYEM","İZEL","İZGİ","ILDIR","ILDIZ","ILGAR","ILGAZ","IŞIK","IŞIKHAN","IŞIN","IŞITAN","ITRİ","İBRAHİM","İDRİS","İHSAN"
+			,"İLBEY","İLCAN","İLGİ","İLHAM","İLHAMİ","İLHAN","İLKAN","İLKAY","İLKCAN","İLKE","İLKER","İLKİN","İLTEKİN","İLTER","İLYAS","İMDAT","İNAL","İNAN"
+			,"İNANÇ","İNAYET","İRFAN","İSA","İSHAK","İSKENDER","İSLAM","İSMAİL","İSMET","İSRAFİL","İSTEMİ","HAN","İŞCAN","İZZET","İZZETTİN","JALE","JALENUR"
+			,"JÜLİDE","KADER","KADRİYE","KAMELYA","KAMİLE","KAMURAN","KARANFİL","KARDELEN","KARMEN","KAYRA","KERİMAN","KERİME","KEVSER","KEZBAN","KISMET"
+			,"KIVILCIM","KIYMET","KİBARİYE","KİRAZ","KÖSEM","KUMRU","KÜBRA","KAAN","KAĞAN","KADEM","KADİR","KADRİ","KAHRAMAN","KAMBER","KAMER","KAMİL"
+			,"KAMURAN","KANDEMİR","KANER","KAPLAN","KARABEY","KARACAN","KARAHAN","KARAKAN","KARAN","KARANALP","KARATAY","KARTAL","KARTAY","KASIM"
+			,"KAYA","KAYAHAN","KAYHAN","KAZIM","KEMAL","KEMALETTİN","KENAN","KERAMETTİN","KEREM","KEREMŞAH","KERİM","KEYHAN","KILIÇ","KILIÇALP","KILIÇHAN"
+			,"KIRCA","KIRDAR","KIRHAN","KIVANÇ","KIVILCIM","KOLÇAK","KONUR","KORAL","KORALP","KORAY","KORCAN","KORÇAK","KOREL","KORHAN","KORKMAZ","KORKUT"
+			,"KORTAN","KÖKER","KÖKSAL","KUBAT","KUBİLAY","KUDRET","KUNTAY","KUNTER","KURT","KURTBEY","KURTULUŞ","KUTAN","KUTAY","KUTBAY","KUTER","KUTHAN"
+			,"KUTLAY","KUTLU","KUTSAL","KUTSİ","KUZEY","KÜRŞAT","LALE","LALEHAN","LAMİA","LATİFE","LEMAN","LEMİDE","LERZAN","LETAFET","LEYLA","LÜTFİYE"
+			,"LÜTUF","LAÇİN","LAMİ","LATİF","LEBİB","LEMA","LEMİ","LEVENT","LOKMAN","LÜTFİ","LÜTFULLAH","LÜTFÜ","MACİDE","MAHİNUR","MAHMURE","MAKBULE"
+			,"MANOLYA","MARAL","MEDİHA","MEFHARET","MEFKURE","MEFTUN","MEHPARE","MEHTAP","MEHVEŞ","MELAHAT","MELDA","MELEK","MELİHA","MELİKE","MELİS"
+			,"MELİSA","MELODİ","MELTEM","MENEKŞE","MENGÜ","MERİÇ","MERİH","MERVE","MERYEM","MESUDE","MISRA","MİHRİBAN","MİMOZA","MİNE","MİRAY","MUALLA","MUAZZEZ"
+			,"MUHTEREM","MUKADDER","MUKADDES","MUNİSE","MUZAFFER","MÜBERRA","MÜCELLA","MÜESSER","MÜGE","MÜJDE","MÜJGAN","MÜKRİME","MÜNEVVER","MÜNİRE"
+			,"MÜRÜVVET","MÜŞERREF","MÜYESSER","MÜZEYYEN","MACİT","MAHİR","MAHMUT","MAHSUN","MAHZUN","MAKBUL","MAKSUT","MALİK","MANÇO","MANSUR","MAZHAR"
+			,"MAZLUM","MECİT","MECNUN","MEDENİ","MEDET","MEHMET","MELİH","MELİK","MEMDUH","MEMNUN","MENDERES","MENGÜ","MENGÜÇ","MENSUR","MERİÇ","MERİH"
+			,"MERT","MESTAN","MESUT","METE","METİN","MEVLÜT","MİKAİL","MİRKELAM","MİRZ","MİTHAT","MUAMMER","MUCİP","MUHAMMED","MUHARREM","MUHİP","MUHİTTİN"
+			,"MUHLİS","MUHSİN","MUHTAR","MUHTEŞEM","MUKBİL","MUNİS","MURAT","MURATHAN","MURTAZA","MUSA","MUSTAFA","MUTİ","MUTLU","MUTLUHAN","MUZAFFER"
+			,"MÜCAHİT","MÜFİT","MÜJDAT","MÜKERREM","MÜKREMİN","MÜMİN","MÜMTAZ","MÜNİR","MÜREN","MÜRSEL","MÜRŞİT","MÜRŞİD","MÜSLÜM","MÜŞFİK","MÜŞTAK"
+			,"NACİYE","NADİDE","NADİRE","NAFİA","NAGEHAN","NAĞME","NAHİDE","NAİLE","NALAN","NAME","NARİN","NAŞİDE","NAZ","NAZAN","NAZENDE","NAZİFE","NAZLI","NAZMİYE"
+			,"NEBAHAT","NECLA","NECMİYE","NEDİME","NEDRET","NEFİSE","NEHİR","NERGİS","NERİMAN","NERMİN","NESLİHAN","NESLİŞAH","NESRİN","NEŞE","NEVAL","NEVCAN"
+			,"NEVİN","NEVRA","NEZAHAT","NEZAKET","NEZİHE","NİDA","NİGAR","NİHAL","NİHAN","NİL","NİLAY","NİLGÜN","NİLSU","NİLÜFER","NİMET","NİSA","NİSAN"
+			,"NUR","NURAL","NURAN","NURAY","NURCAN","NURÇİN","NURDAN","NURGÜL","NURHAN","NURİYE","NURPERİ","NURSEL","NURSELİ","NURSEN","NURŞEN"
+			,"NÜKHET","NABİ","NACİ","NADİ","NADİR","NAFİ","NAFİZ","NAHİT","NAİL","NAİM","NAMIK","NAMİ","NASIR","NASRETTİN","NASUH","NASUHİ","NAŞİT","NAŞİD"
+			,"NAZIM","NAZIR","NAZİF","NAZMİ","NEBİ","NECAT","NECATİ","NECDET","NECİP","NECMETTİN","NECMİ","NEDİM","NEDRET","NEHAR","NEJAT","NESİM","NEŞAT"
+			,"NEŞET","NEVZAT","NEYZEN","NEZİH","NEZİHİ","NİHAT","NİYAZİ","NİZAM","NİZAMETTİN","NİZAMİ","NUH","NUMAN","NURETTİN","NURİ","NURKAN","NURŞAT"
+			,"NURTAÇ","NUSRET","NUSRETTİN","NÜVİT","NÜZHET","OKŞAN","OLCA","OLCAY","ORKİDE","OYA","ÖĞÜN","ÖĞÜT","ÖMÜR","ÖNGÜL","ÖVGÜ","ÖVGÜL","ÖVÜN","ÖYKÜ"
+			,"ÖZDEN","ÖZGE","ÖZGEN","ÖZGÜL","ÖZLEM","ÖZLEN","ÖZNUR","ÖZÜN","OFLAZ","OGÜN","OĞAN","OĞUL","OĞUR","OĞUZ","OĞUZHAN","OKAN","OKAY","OKCAN","OKER","OKTAR"
+			,"OKTAY","OLCAY","OLCAYTO","OLGUN","OMAÇ","OMAY","ONAT","ONAY","ONGAR","ONGUN","ONUR","ONURAL","ONURALP","ONURHAN","ORBAY","ORÇUN","ORHAN"
+			,"ORHUN","ORKUN","ORKUT","ORTAÇ","ORTUN","ORTUNÇ","ORUÇ","OSMAN","OYTUN","OZAN","ÖCAL","ÖDÜL","ÖGEDAY","ÖĞÜN","ÖĞÜNÇ","ÖĞÜT","ÖKER","ÖKKEŞ"
+			,"ÖKMEN","ÖKTEM","ÖKTEN","ÖMER","ÖMÜR","ÖNAL","ÖNAY","ÖNDER","ÖNEL","ÖNER","ÖRSAN","ÖRSEL","ÖVÜL","ÖVÜNÇ","ÖYMEN","ÖZAL","ÖZALP","ÖZAY","ÖZBEK"
+			,"ÖZCAN","ÖZDEMİR","ÖZDEN","ÖZEN","ÖZER","ÖZGÜN","ÖZGÜR","ÖZHAN","ÖZKAN","ÖZMEN","ÖZTÜRK","ÖZÜN","PAKİZE","PAPATYA","PARLA","PELİN","PELİNSU"
+			,"PEMBE","PERÇEM","PEREN","PERİ","PERİHAN","PERRAN","PERVİN","PETEK","PINAR","PIRILTI","PİRAYE","PÜREN","PAKEL","PAKER","PAKSOY","PALA","PAMİR"
+			,"PARS","PAŞA","PAYDAŞ","PAYİDAR","PEHLİVAN","PEKCAN","PEKER","PERKER","PERTEV","PEYAM","PEYAMİ","PEYKAN","PEYMAN","POLAT","POYRAZ","POZAN","RABİA"
+			,"RAHİME","RAHŞAN","RANA","RAZİYE","REBİA","REFAH","REFİKA","REMZİYE","RENAN","RENGİN","REŞİDE","REVAN","REYHAN","REZZAN","RUHAN","RUHSAR"
+			,"RUHŞEN","RÜYA","RÜYET","RACİ","RAFET","REFET","RAGIP","RAHİM","RAHMAN","RAHMİ","RAİF","RAKIM","RAMAZAN","RAMİ","RAMİZ","RASİM" ,"RASİN"
+			,"RAŞİT","RAUF","RECAİ","RECEP","REFET","REFİĞ","REFİK","REHA","REMZİ","RENAN","RESUL","REŞAT","REŞİT","REŞİD","RIDVAN","RIFAT","RIFKI"
+			,"RIZA","RUHİ","RUŞEN","RÜÇHAN","RÜKNETTİN","RÜSTEM","RÜŞTÜ","SAADET","SABAHAT","SABİHA","SABİTE","SABRİYE","SACİDE","SADRİYE","SAFİYE"
+			,"SAHİBA","SAHURE","SAİME","SAKİNE","SALİHA","SALİME","SAMİME","SAMİYE","SANAY","SANEM","SANİA","SANİYE","SEBLA","SEÇİL","SEDA","SEDEF"
+			,"SEDEN","SEHER","SELCAN","SELDA","SELEN","SELİN","SELMA","SELVİ","SEMA","SEMAHAT","SEMİHA","SEMİN","SEMİRAMİS","SEMRA","SENA","SENAY"
+			,"SENEM","SERAP","SERAY","SEREN","SERİN","SERPİL","SERRA","SERTAP","SERVA","SEVAL","SEVCAN","SEVDA","SEVGİ","SEVİL","SEVİLAY","SEVİM"
+			,"SEVİN","SEVİNÇ","SEVTAP","SEYHAN","SEYRAN","SEYYAL","SEZA","SEZAL","SEZEN","SEZER","SEZGİ","SEZGİN","SIDIKA","SILA","SIRMA","SİBEL"
+			,"SİMA","SİMGE","SİNEM","SOLMAZ","SONAT","SONAY","SONGÜL","SONNUR","SU","SULTAN","SUNA","SUNAY","SUZAN","SÜHANDAN","SÜHEYLA","ŞADİYE","ŞAFAK"
+			,"ŞAHİKA","ŞAZİMENT","ŞAZİYE","ŞEBNEM","ŞEFİKA","ŞEHNAZ","ŞEHRAZAT","ŞEHRİBAN","ŞELALE","ŞENAY","ŞENGÜL","ŞENİZ","ŞENNUR","ŞERİFE","ŞERMİN"
+			,"ŞEVVAL","ŞEYDA","ŞEYMA","ŞİRİN","ŞULE","ŞÜKRAN","ŞÜKRİYE","SAADETTİN","SABAH","SABAHATTİN","SABİR","SABİT","SABRİ","SACİT","SACİD","SADETTİN"
+			,"SADIK","SADRİ","SADULLAH","SADUN","SAFA","SAFFET","SAFİ","SAİM","SAİT","SAİD","SAKIP","SAKİN","SALİH","SALİM","SALTUK","SAMET","SAMED"
+			,"SAMİ","SAMİH","SAMİM","SANBER","SANCAR","SANER","SANVER","SARGIN","SARP","SARPER","SARUHAN","SAVAŞ","SAYHAN","SAZAK","SEÇKİN"
+			,"SEDAT","SEFA","SEFA","SAFA","SEFER","SEHA","SELAHATTİN","SELAMİ","SELCAN","SELÇUK","SELİM","SELMAN","SEMİH","SENİH","SERALP","SERBÜLENT"
+			,"SERCAN","SERDAR","SERGEN","SERHAN","SERHAT","SERKAN","SERKUT","SERMET","SERTAÇ","SERTER","SERVER","SERVET","SEYFETTİN","SEYFİ","SEYHAN"
+			,"SEYİT","SEZAİ","SEZER","SEZGİN","SIDDIK","SITKI","SİMAVİ","SİNA","SİNAN","SİPAHİ","SONER","SONGUR","SOYSAL","SÖKMEN","SÖNMEZ","SUAT","SUAVİ"
+			,"SUAY","SUPHİ","SÜLEYMAN","SÜMER","SÜREYYA","SÜRURİ","ŞABAN","ŞADİ","ŞAFAK","ŞAHAP","ŞAHİN","ŞAHZAT","ŞAİR","ŞAKİR","ŞAMİL","ŞANSAL","ŞANVER"
+			,"ŞARIK","ŞECAATTİN","ŞEFİK","ŞEHMUZ","ŞEHZADE","ŞEMSETTİN","ŞENEL","ŞENER","ŞENOL","ŞENSOY","ŞENTÜRK","ŞERAFETTİN","ŞEREF","ŞERİF","ŞEVKET","ŞEVKİ"
+			,"ŞİNASİ","ŞÜKRÜ","TAÇNUR","TAHİRE","TAHSİNE","TALHA","TALİA","TAMAY","TANAY","TANSU","TANYEL","TARA","TAYYİBE","TEKGÜL","TENAY","TENDÜ","TENNUR","TEZER"
+			,"TİJEN","TİLBE","TUBA","TUĞÇE","TURNA","TUTAM","TUTKU","TÜLAY","TÜLİN","TÜNAY","TUNAY","TÜRKAN","TÜRKÜ","TACETTİN","TACİ","TAÇKIN"
+			,"TAHİR","TAHSİN","TAKİ","TALAT","TALAY","TALİP","TAMAY","TAMER","TAN","TANAY","TANBERK","TANER","TANJU","TANKUT","TANSEL","TANSU"
+			,"TARHAN","TARIK","TARKAN","TAŞKIN","TAYFUN","TAYFUR","TAYGUN","TAYLAN","TAYYAR","TAYYİB","TEKCAN","TEKİN","TEMEL","TEOMAN","TERCAN","TEVFİK"
+			,"TEZALP","TEZCAN","TEZKAN","TINAZ","TİMUÇİN","TİMUR","TOKCAN","TOKER","TOKTAMIŞ","TOLGA","TOLUNAY","TONGUÇ","TOPRAK","TOYGAR","TUFAN","TUGAY"};
+
+	
+	//Baslık dizisi tanımı
+	private String[] titleWords=new String[KisiSozlugu.length] ;
+	
+	//Buyuk Harf dizisi tanımı
+	private String[] buyukHarf= {"A","B","C","D","E","F","G","H","I","İ","K","L","M","N","O","Ö","P","R","S","T","U","Ü","V","Y","Z"};
+	
+	//harfleri atadığım dizinin tanımı
+	private String[]  letter=new String[KisiSozlugu.length];
 	// *****
 	private String[] stopWords = { "acaba", "ama", "ancak", "artık", "asla", "aslında", "az", "altmış", "altı", "arada",
 			"ayrıca", "bana", "bazen", "bazı", "bazıları", "bazısı", "belki", "ben", "beni", "benden", "beri", "benim",
@@ -74,9 +209,6 @@ public class Summarizing {
 		}
 	}
 
-	// Baslikta geçen kelimelerin kontrolü
-
-	String[] titleWords = new String[stopWords.length];
 
 	public void titleWords(String[][] Sentence) {
 
@@ -111,24 +243,6 @@ public class Summarizing {
 		}
 	}
 
-	// Sozluk okuma kısmını buraya aldım ama başka alternatifte düşünebiliriz
-	// OzelIsımler sınıfında da kalabilir oradan çağırırız fonksiyonu
-	public String[] SozlukOku(String str) throws IOException {
-		List<String> liste = new ArrayList<String>();
-		String[] dizi = new String[liste.size()];
-		File dosya = new File(str);
-		// BufferedReader br = new BufferedReader(new InputStreamReader(new
-		// FileInputStream(dosya), "ISO-8859-9"));
-		/*
-		 * while((satir = br.readLine()) != null){ liste.add(satir); }
-		 * 
-		 * for(int i=0;i<liste.size();i++) { dizi[i]=liste.get(i); }
-		 * 
-		 * 
-		 * br.close();
-		 */
-		return dizi;
-	}
 
 	// *****
 	// OzelIsım buldurma kısmında istediğimiz sozluk yolunu verip okutabiliriz
@@ -138,31 +252,55 @@ public class Summarizing {
 	// vermiyor kodda.
 	public void ProperNoun(String[][] Sentence, String dictionary) {
 		String[][] str = Sentence;
-		String[] word = new String[str.length];
-		String[] sozluk = new String[str.length];
+		String[] word;
+	
 		try {
-			sozluk = SozlukOku(dictionary);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		try {
-
+			
 			for (int i = 0; i < str.length; i++) {
 				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
-
+				
 				for (int j = 0; j < word.length; j++)
-					for (int k = 0; k < sozluk.length; k++)
-						if (word[j].equals(sozluk[k]) && !word[j].equals(null))
+					for (int k = 0; k < KisiSozlugu.length; k++)
+						if (word[j].equals(KisiSozlugu[k]) && !word[j].equals(null)) {
 							counter[i] += 3;
-
+						}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
-
+		//eğer özel isim dizisinde yok ise aşağıdaki işlemi yaptırmasını söyledim
+		//Burada ki işlemde kelimeleri harflere bölerek letter  dizisine atadım.
+		//bu string dizisinin değerini büyük harf dizisiyle karşılaştırdım.
+		//Şuanlık kullanmasakta kalsın buarada siledebiliriz
+		//iç içe döngü çok fazla oldu bir alternatif önerisi alabilirim??
+		/*
+		try {
+			for (int i = 0; i < str.length; i++) {
+				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
+				letter[i]=word[i].substring(i);
+				
+				for (int j = 0; j < word.length; j++)
+					for (int k = 0; k < KisiSozlugu.length; k++)
+						for(int m=0;m<buyukHarf.length;m++) {
+							for(int n=0;n<letter.length;n++) {
+								if (word[j].equals(KisiSozlugu[k]) && !word[j].equals(null)) {
+									counter[i] += 3;
+								}else if(letter[n].equals(buyukHarf[m]) && !letter[n].equals(null)) {
+									counter[i] += 3;
+								
+							}
+					}
+						}
+			
+				} 
+			}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		*/
+					
+	
 		for (int i = 0; i < 100; i++) {
 			System.out.println("ProperNoun - " + i + " :" + counter[i]);
 		}
