@@ -245,11 +245,7 @@ public class Summarizing {
 
 
 	// *****
-	// OzelIsım buldurma kısmında istediğimiz sozluk yolunu verip okutabiliriz
-	// organizasyon ,yer ismi
-	// ve ozel isim dahildir bu kısma
-	// sözlükler bende silinmiş mailden de bulamıyorum kontrolünü yapamadım ama hata
-	// vermiyor kodda.
+	
 	public void ProperNoun(String[][] Sentence, String dictionary) {
 		String[][] str = Sentence;
 		String[] word;
