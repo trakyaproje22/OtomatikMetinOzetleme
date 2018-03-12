@@ -143,8 +143,7 @@ public class Summarizing {
 			,"TEZALP","TEZCAN","TEZKAN","TINAZ","TİMUÇİN","TİMUR","TOKCAN","TOKER","TOKTAMIŞ","TOLGA","TOLUNAY","TONGUÇ","TOPRAK","TOYGAR","TUFAN","TUGAY"};
 
 	
-	//Baslık dizisi tanımı
-	private String[] titleWords=new String[KisiSozlugu.length] ;
+	
 	
 	//Buyuk Harf dizisi tanımı
 	private String[] buyukHarf= {"A","B","C","D","E","F","G","H","I","İ","K","L","M","N","O","Ö","P","R","S","T","U","Ü","V","Y","Z"};
@@ -204,9 +203,9 @@ public class Summarizing {
 			System.out.println(e.getMessage());
 		}
 
-		for (int i = 0; i < 100; i++) {
-			System.out.println("PositiveWord - " + i + " :" + counter[i]);
-		}
+		//for (int i = 0; i < 100; i++) {
+		//	System.out.println("PositiveWord - " + i + " :" + counter[i]);
+		//}
 	}
 
 
@@ -215,12 +214,8 @@ public class Summarizing {
 		String[][] str = Sentence;
 		String[] word;
 
-		// Burada çift boyutlu dizide ki ilk cümleye ait olan kelimeleri başlık kelimesi
-		// olarak kabul ediyorum
-		for (int j = 0; j < str.length; j++) {
-			titleWords[j] += str[0][j];
-
-		}
+		String[] title=str[0][0].split(", ,"); // İlk cümle başlık cümlesi olarak diziye atılıyor.
+		String[] titleWords=title[0].split(" "); //başlık cümlesi kelimelere ayrılıyor.
 
 		try {
 
@@ -238,15 +233,15 @@ public class Summarizing {
 			System.out.println(e.getMessage());
 		}
 
-		for (int i = 0; i < 100; i++) {
-			System.out.println("TitleWord - " + i + " :" + counter[i]);
-		}
+		//for (int i = 0; i < 100; i++) {
+		//	System.out.println("TitleWord - " + i + " :" + counter[i]);
+		//}
 	}
 
 
 	// *****
 	
-	public void ProperNoun(String[][] Sentence, String dictionary) {
+	public void ProperNoun(String[][] Sentence) {
 		String[][] str = Sentence;
 		String[] word;
 	
@@ -265,41 +260,10 @@ public class Summarizing {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
-		//eğer özel isim dizisinde yok ise aşağıdaki işlemi yaptırmasını söyledim
-		//Burada ki işlemde kelimeleri harflere bölerek letter  dizisine atadım.
-		//bu string dizisinin değerini büyük harf dizisiyle karşılaştırdım.
-		//Şuanlık kullanmasakta kalsın buarada siledebiliriz
-		//iç içe döngü çok fazla oldu bir alternatif önerisi alabilirim??
-		/*
-		try {
-			for (int i = 0; i < str.length; i++) {
-				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
-				letter[i]=word[i].substring(i);
-				
-				for (int j = 0; j < word.length; j++)
-					for (int k = 0; k < KisiSozlugu.length; k++)
-						for(int m=0;m<buyukHarf.length;m++) {
-							for(int n=0;n<letter.length;n++) {
-								if (word[j].equals(KisiSozlugu[k]) && !word[j].equals(null)) {
-									counter[i] += 3;
-								}else if(letter[n].equals(buyukHarf[m]) && !letter[n].equals(null)) {
-									counter[i] += 3;
-								
-							}
-					}
-						}
-			
-				} 
-			}catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
-		}
-		*/
-					
-	
-		for (int i = 0; i < 100; i++) {
-			System.out.println("ProperNoun - " + i + " :" + counter[i]);
-		}
+		
+		//for (int i = 0; i < 100; i++) {
+		//	System.out.println("ProperNoun - " + i + " :" + counter[i]);
+		//}
 
 	}
 	// ****************Burada son buluyor yaptıklarım****************
@@ -513,11 +477,24 @@ public class Summarizing {
 
 		String[] paragraph = new String[100];
 		String str = null;
-
+		
+		
+		int temp=0;
+		int c=0;
+		
+		for(int i=0; i < counter.length;i++){
+			c++;
+		}
+		
+		for(int i=0; i<counter.length;i++) {
+			temp+=counter[i];
+		}
+		
+		temp= temp / c;
 		paragraph = Sentence.split("(\\.)");
 
-		for (int i = 0; i < counter.length; i++) {
-			if (counter[i] > 0) {
+		for (int i = 0; i < c; i++) {
+			if (counter[i] > temp) {
 				str += paragraph[i] + " .";
 			}
 		}
