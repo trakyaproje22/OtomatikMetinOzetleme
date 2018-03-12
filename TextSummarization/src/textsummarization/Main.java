@@ -74,8 +74,12 @@ public class Main extends JFrame {
 				if (!OrjinalTextArea.getText().equals("")) {
 					SM.SentencePosition(OrjinalTextArea.getText().toString());// Cümlenin konumunu kontrol ediliyor.
 					try {
-						SM.NegativeWord(SI.Cumle(OrjinalTextArea.getText().toString()));// Negatif kelime kontrol
-																						// ediliyor.
+						SM.NegativeWord(SI.Cumle(OrjinalTextArea.getText().toString()));// Negatif kelime kontrol ediliyor.
+					
+						SM.PositiveWord(SI.Cumle(OrjinalTextArea.getText().toString())); // Pozitif kelime kontrol
+						SM.titleWords(SI.Cumle(OrjinalTextArea.getText().toString())); //Baslik kontrol
+						SM.ProperNoun(SI.Cumle(OrjinalTextArea.getText().toString())); // Özel İsim kontrol
+					
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
