@@ -17,6 +17,12 @@ public class Summarizing {
 			"en önemlisi" };
 	private String satir;
 	
+	//harf dizisi 
+	String[] harf;
+	//Buyuk Harf dizisi tanımı
+	private String[] buyukHarf= {"A","B","C","D","E","F","G","H","I","İ","K","L","M","N","O","Ö","P","R","S","T","U","Ü","V","Y","Z"};
+	
+	
 	//KisiSözlugunu diziye çevirdim hala da devam etmekteyim eklemeleri yapıcam 
 	//Aynı şekilde organizasyon ve yer isimleri içinde yapıyorum
 	//Sizce hepsi bir dizide mi olsun ayrı dizide mi??
@@ -145,11 +151,8 @@ public class Summarizing {
 	
 	
 	
-	//Buyuk Harf dizisi tanımı
-	private String[] buyukHarf= {"A","B","C","D","E","F","G","H","I","İ","K","L","M","N","O","Ö","P","R","S","T","U","Ü","V","Y","Z"};
 	
-	//harfleri atadığım dizinin tanımı
-	private String[]  letter=new String[KisiSozlugu.length];
+	
 	// *****
 	private String[] stopWords = { "acaba", "ama", "ancak", "artık", "asla", "aslında", "az", "altmış", "altı", "arada",
 			"ayrıca", "bana", "bazen", "bazı", "bazıları", "bazısı", "belki", "ben", "beni", "benden", "beri", "benim",
@@ -256,6 +259,24 @@ public class Summarizing {
 							counter[i] += 3;
 						}
 			}
+			//denemek adına koydum 
+			
+			/*
+				for (int i = 0; i < str.length; i++) {
+				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
+				for(int j=0;j<word.length;j++) {
+					harf[i]=word[i].substring(0);
+					for(int k=0;k<harf.length;k++) {
+						for(int m=0;m<buyukHarf.length;m++) {
+							if (harf[k].equals(buyukHarf[m]) && !harf[k].equals(null)) {
+								counter[i] += 3;
+						}
+					}
+				}
+			}
+			}
+			*/
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
