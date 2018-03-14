@@ -180,6 +180,7 @@ public class Summarizing {
 			"veya", "veyahut", "ya", "ya da", "yani", "yapacak", "yapılan", "yapılması", "yapıyor", "yapmak", "yaptı",
 			"yaptığı", "yaptığını", "yaptıkları", "yedi", "yerine", "yetmiş", "yine", "yirmi", "yoksa", "yüz", "zaten",
 			"zira" };
+	private String[] aylar = { "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"};
 
 	public int[] counter = new int[stopWords.length];
 
@@ -462,9 +463,6 @@ public class Summarizing {
 	}
 
 	// tarih puanlandırması
-	// kelimede 2 adet . veya / geçiyorsa tarih sayıyor
-	// ay isimleri içinde bir değerlendirme yapılması gerekecek
-	// DAHA TEST EDİLMEDİ
 	public void DatePointing(String[][] Sentence) {
 		String[][] str = Sentence;
 		String[] word;
@@ -475,12 +473,16 @@ public class Summarizing {
 
 				for (int j = 0; j < word.length; j++)
 					for (int k = 0; k < stopWords.length; k++)
-						if (((word[j].length() - word[j].replace(".", "").length() == 2)
-								|| (word[j].length() - word[j].replace("/", "").length() == 2))
-								&& !word[j].equals(null))
-							counter[i] += 1;
-
-			}
+						if (((word[j].length() - word[j].replace(".", "").length() == 2) || (word[j].length() - word[j].replace("/", "").length() == 2)) && !word[j].equals(null)){
+						counter[i] += 1;
+						}
+						else{
+							for (int k = 0; k < aylar.length; k++){
+								if (word[j].equals(aylar[k]) && !word[j].equals(null))
+								counter[i] += 1;
+							}
+						}
+						}
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
