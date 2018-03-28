@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
 public class FileRW {
 	public String[] kelime = null, kok;
@@ -19,8 +21,9 @@ public class FileRW {
 	public String FileRead(String path) throws IOException {
 		dosya = new File(path);
 
-		FileReader fr = new FileReader(dosya);
-		BufferedReader br = new BufferedReader(fr);
+		System.setProperty("file.encoding", "UTF-8");
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(dosya),"UTF8"));
+		//dosyayı utf-8 formatında çözüyor.
 
 		while ((satir = br.readLine()) != null) {
 			lst.add(satir);
@@ -35,7 +38,6 @@ public class FileRW {
 		text = lst.toString();
 
 		br.close();
-		fr.close();
 
 		return text;
 	}
