@@ -180,8 +180,8 @@ public class Summarizing {
 			"veya", "veyahut", "ya", "ya da", "yani", "yapacak", "yapılan", "yapılması", "yapıyor", "yapmak", "yaptı",
 			"yaptığı", "yaptığını", "yaptıkları", "yedi", "yerine", "yetmiş", "yine", "yirmi", "yoksa", "yüz", "zaten",
 			"zira" };
-	private String[] aylar = { "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"};
-
+	private String[] aylar = { "ocak", "şubat", "mart", "nisan", "mayıs", "haziran", "temmuz", "ağustos", "eylül", "ekim", "kasım", "aralık",
+			"Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık" };
 	public int[] counter = new int[stopWords.length];
 
 	// **************Burası yeni eklenen yerler************
@@ -412,31 +412,31 @@ public class Summarizing {
 	public void PunctuationPointing(String[][] Sentence) {
 		String[][] str = Sentence;
 		String[] word;
+		String[] punctuate = {"?", "!"};
 
 		try {
 			for (int i = 0; i < str.length; i++) {
 				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
 
-				for (int j = 0; j < word.length; j++)
-					for (int k = 0; k < stopWords.length; k++)
-						if (((word[j].substring(word[j].length() - 1) == "?")
-								|| (word[j].substring(word[j].length() - 1) == "!")) && !word[j].equals(null))
+				for (int j = 0; j < word.length; j++){
+					for (int k = 0; k < 2; k++){
+						if (word[j].equals(punctuate[k])){
 							counter[i] += 2;
-
+						}
+					}
+				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
 
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 2; i++) {
 			System.out.println("SpecialPunctuation - " + i + " :" + counter[i]);
 		}
 	}
 
-	// çift tırnağa göre puanlama(kelimenin sonunda veya başında tırnak işareti
-	// varsa +1 puan veriliyor,
-	// böylece algoritma 2 kelime bulduğunda toplamda +2 puan veriyor)
+	// çift tırnağa göre puanlama
 	public void QuotationPointing(String[][] Sentence) {
 		String[][] str = Sentence;
 		String[] word;
@@ -445,25 +445,28 @@ public class Summarizing {
 			for (int i = 0; i < str.length; i++) {
 				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
 
-				for (int j = 0; j < word.length; j++)
-					for (int k = 0; k < stopWords.length; k++)
-						if (((word[j].substring(word[j].length() - 1) == "\"") || (word[j].substring(0, 1) == "\""))
-								&& !word[j].equals(null))
+				for (int j = 0; j < word.length; j++){
+					if (!word[j].equals(null)){
+						String substrtemp = word[j].substring(0,1);
+						System.out.println(substrtemp);
+						if (substrtemp == "'"){
 							counter[i] += 1;
+						}
+						}
+						}
 
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
 
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 2; i++) {
 			System.out.println("Quote - " + i + " :" + counter[i]);
 		}
 	}
 
 	// tarih puanlandırması
-	public void DatePointing(String[][] Sentence) {
+public void DatePointing(String[][] Sentence) {
 		String[][] str = Sentence;
 		String[] word;
 
@@ -471,24 +474,23 @@ public class Summarizing {
 			for (int i = 0; i < str.length; i++) {
 				word = str[i][0].split("( )|(\\.)|(\\,)|(\\?)|(\\[)|(\\])");
 
-				for (int j = 0; j < word.length; j++)
-					for (int k = 0; k < stopWords.length; k++)
-						if (((word[j].length() - word[j].replace(".", "").length() == 2) || (word[j].length() - word[j].replace("/", "").length() == 2)) && !word[j].equals(null)){
+				for (int j = 0; j < word.length; j++){
+					for (int k = 0; k < aylar.length; k++){
+						if (word[j].equals(aylar[k]) && !word[j].equals(null)){
 						counter[i] += 1;
-						}
-						else{
-							for (int k = 0; k < aylar.length; k++){
-								if (word[j].equals(aylar[k]) && !word[j].equals(null))
-								counter[i] += 1;
-							}
-						}
-						}
+						}}}
+				
+				for (int l = 0; l < word.length; l++){
+				if (((word[l].length() - word[l].replace(".", "").length() == 2) || (word[l].length() - word[l].replace("/", "").length() == 2)) && !word[l].equals(null)){
+					counter[i] += 1;
+				}}
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
 
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 5; i++) {
 			System.out.println("Date - " + i + " :" + counter[i]);
 		}
 	}
