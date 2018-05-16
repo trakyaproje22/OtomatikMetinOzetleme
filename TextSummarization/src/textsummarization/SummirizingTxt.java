@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import zemberek.tokenization.TurkishSentenceExtractor;
+
 
 
 public class SummarizingTxt {
@@ -48,9 +50,9 @@ public class SummarizingTxt {
 	
 	private int[] KTekrar = new int[750];
 
-	static int FToplam = 0;
-
-	static float ortalama = 0;
+	private static int FToplam = 0;
+ 
+	private static float ortalama = 0;
 	
 	// *****
 	// Buranın kontrolü yapıldı şuanda ilk ve son paragraftaki cümlelerin puanlarını
@@ -173,7 +175,7 @@ public class SummarizingTxt {
 			String[] properNoun;
 			try {
 				
-				File file = new File("C:/Users/Kubra/Desktop/Sözlük/OzelIsimler.txt");
+				File file = new File("C:/YeniMetinler/Ozel_Isimler/CustomName.txt");
 				FileReader fr = new FileReader(file);
 				BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 
@@ -483,9 +485,11 @@ public class SummarizingTxt {
 //			}
 	}
 
+	public List<String> list = new ArrayList<String>();
+
 	// *****
 	// Burda her cümlenin puanına bakılarak özet e eklenecek olan cümle
-	// belirlencektir.
+	// belirlencektir.	
 	public String SortignSentence(String Sentence) {
 
 		String[] paragraph = new String[100];
@@ -493,6 +497,11 @@ public class SummarizingTxt {
 
 		int temp = 0;
 		int c = 0;
+		
+
+		//TurkishSentenceExtractor ekstra = TurkishSentenceExtractor.DEFAULT;
+		//list = ekstra.fromParagraph(Sentence);
+
 		paragraph = Sentence.split("(\\.)");
 
 		for (int i = 0; i < counter.length; i++) {
@@ -506,9 +515,9 @@ public class SummarizingTxt {
 
 		temp = temp / c;
 
-		for (int i = 0; i < c; i++) {
+		for (int i = 0; i < paragraph.length; i++) {
 			if (counter[i] > temp) {
-				str += paragraph[i] + " .";
+				str += paragraph[i] + ". ";
 			}
 		}
 
