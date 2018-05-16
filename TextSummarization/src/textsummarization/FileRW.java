@@ -42,7 +42,7 @@ public class FileRW {
 	}
 
 	public void FileWrite(String path) throws IOException {
-		dosya = new File("C:/YeniMetinler/OZET METINLER/Metinler(1-5)/1.txt");
+		dosya = new File(path);
 		if (!dosya.exists())
 			dosya.createNewFile();
 
@@ -55,4 +55,3 @@ public class FileRW {
 		fw.close();
 	}
 }
-
