@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import zemberek.tokenization.TurkishSentenceExtractor;
+
 
 
 public class SummarizingFile {
@@ -142,7 +144,7 @@ public class SummarizingFile {
 		String[] properNoun;
 		try {
 			
-			File file = new File("C:/Users/Kubra/Desktop/Sözlük/OzelIsimler.txt");
+			File file = new File("C:/YeniMetinler/Ozel_Isimler/CustomName.txt");
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 
@@ -394,8 +396,6 @@ public class SummarizingFile {
 
 	}
 
-	// YENİ EKLENEN YERLER //
-
 	// burada noktalama işaretlerine göre puanlama yapılıyor(kelimenin sonunda soru
 	// veya ünlem işareti varsa +2 puan veriliyor)
 	public void PunctuationPointing(String[][] Sentence) {
@@ -416,7 +416,6 @@ public class SummarizingFile {
 				}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
 
@@ -425,7 +424,7 @@ public class SummarizingFile {
 //		}
 	}
 
-	// çift tırnağa göre puanlama
+	// tırnağa göre puanlama
 	public void QuotationPointing(String[][] Sentence) {
 		String[][] str = Sentence;
 		String[] word;
@@ -475,7 +474,6 @@ public void DatePointing(String[][] Sentence) {
 				}}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
 
@@ -484,6 +482,7 @@ public void DatePointing(String[][] Sentence) {
 //		}
 	}
 
+	public List<String> list = new ArrayList<String>();
 	// *****
 	// Burda her cümlenin puanına bakılarak özet e eklenecek olan cümle
 	// belirlencektir.
@@ -501,16 +500,20 @@ public void DatePointing(String[][] Sentence) {
 		}
 		
 		for(int i=0; i<counter.length;i++) {
-			temp+=counter[i];
+			temp += counter[i];
 		}
 		
 		temp= temp / c;
+		
+		//TurkishSentenceExtractor ekstra = TurkishSentenceExtractor.DEFAULT;
+		//list = ekstra.fromParagraph(Sentence);
+		
 		paragraph = Sentence.split("(\\.)");
 
 		
-		for (int i = 0; i < c; i++) {
+		for (int i = 0; i < paragraph.length; i++) {
 			if (counter[i] > temp) {
-				str += paragraph[i] + " .";
+				str += paragraph[i] + ". ";
 			}
 		}
 
