@@ -63,25 +63,24 @@ public class Main extends JFrame {
 		});
 	}
 
-	
-	public String textSplitting(String text){
-		int sayac=0;
+	public String textSplitting(String text) {
+		int sayac = 0;
 		String[] kelimeler = text.split(" ");
 		for (int i = 0; i < kelimeler.length; i++) {
-			if (kelimeler[i].length() + sayac < 75){
+			if (kelimeler[i].length() + sayac < 75) {
 				sayac = sayac + kelimeler[i].length() + 1;
-			}
-			else {
+			} else {
 				kelimeler[i] = kelimeler[i] + "\r\n";
 				sayac = 0;
 			}
 		}
 		text = " ";
-		for (int j = 0; j < kelimeler.length; j++){
+		for (int j = 0; j < kelimeler.length; j++) {
 			text = text + kelimeler[j] + " ";
 		}
 		return text;
 	}
+
 	/**
 	 * Create the frame.
 	 */
@@ -107,7 +106,7 @@ public class Main extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (!FileReadClick) {
 					SummarizationTextArea.setText("");
-					
+
 					if (!OrjinalTextArea.getText().equals("")) {
 						// Burada bazı sorunlar olabilir tekrar kontrol edilmesi gerekir.
 						SMT.SentencePosition(OrjinalTextArea.getText().toString());
@@ -115,8 +114,11 @@ public class Main extends JFrame {
 						try {
 
 							// Başlık da geçen kelimelerin kontrolü yapılacak.
-							SMT.titleWords(SI.Cumle(OrjinalTextArea.getText().toString()));
-
+							String[][] str = SI.Cumle(OrjinalTextArea.getText().toString());
+							String[] title = str[0][0].split("\n\n");// ilk cumle aliniyor
+							if (!title[0].equals(null) && (title[0].substring(0, title[0].length()-1) != ".")) {
+								SMT.titleWords(SI.Cumle(OrjinalTextArea.getText().toString()));
+							}
 							// Pozitif kelime kontrolü yapılıyor.
 							SMT.PositiveWord(SI.Cumle(OrjinalTextArea.getText().toString()));
 
@@ -133,9 +135,9 @@ public class Main extends JFrame {
 							SMT.DatePointing(SI.Cumle(OrjinalTextArea.getText().toString()));
 
 							// Özel İsim kelime kontrol
-							 SMT.properNoun(SI.Cumle(OrjinalTextArea.getText().toString()));
-							 SMT.ProperNoun(SI.Cumle(OrjinalTextArea.getText().toString()));
-						
+							SMT.properNoun(SI.Cumle(OrjinalTextArea.getText().toString()));
+							SMT.ProperNoun(SI.Cumle(OrjinalTextArea.getText().toString()));
+
 						} catch (Exception io) {
 							System.out.println(io.getMessage());
 						}
@@ -152,17 +154,18 @@ public class Main extends JFrame {
 						}
 
 						// Özetleme işlemi gerçekleştirilecektir.
-						
+
 						String str2 = SMT.SortignSentence(OrjinalTextArea.getText().toString());
 						String[] str = str2.split("(, ,)|(null)");
 						String[] temp = str[1].split("\n\n");
-						for (int i = 1; i < temp.length; i++) {
+						for (int i = 0; i < temp.length; i++) {
 							SummarizationTextArea.append(temp[i] + "\n\n");
-							SummarizationTextArea.setCaretPosition(SummarizationTextArea.getDocument().getLength());	
+							SummarizationTextArea.setCaretPosition(SummarizationTextArea.getDocument().getLength());
 						}
+
 						
-						for(int i = 0; i < SMF.counter.length; i++) {
-							SMF.counter[i] = 0;
+						for (int i = 0; i < SMT.counter.length; i++) {
+							SMT.counter[i] = 0;
 						}
 					}
 				} else {
@@ -170,12 +173,13 @@ public class Main extends JFrame {
 					if (!OrjinalTextArea.getText().equals("")) {
 
 						SummarizationTextArea.setText("");
-						
+
 						SMF.SentencePosition(OrjinalTextArea.getText().toString());// Cümlenin konumunu kontrol
 																					// ediliyor.
 						try {
 
-							SMF.NegativeWord(SI.Cumle(OrjinalTextArea.getText().toString()));// Negatif kelime kontrol ediliyor.
+							SMF.NegativeWord(SI.Cumle(OrjinalTextArea.getText().toString()));// Negatif kelime kontrol
+																								// ediliyor.
 
 							SMF.titleWords(SI.Cumle(OrjinalTextArea.getText().toString()));// Baslik kontrol
 							SMF.PositiveWord(SI.Cumle(OrjinalTextArea.getText().toString()));// Pozitif kelime kontrol
@@ -201,17 +205,17 @@ public class Main extends JFrame {
 						SummarizationTextArea.setText("");
 						String[] str = SMF.SortignSentence(OrjinalTextArea.getText().toString()).split("(, ,)|(null)");
 						String[] temp = str[1].split("\r\n\r\n");
-						
+
 						for (int i = 1; i < temp.length; i++) {
-							SummarizationTextArea.append(temp[i] +"--");
+							SummarizationTextArea.append(temp[i] + "--");
 						}
 
-						String fixedResult= SummarizationTextArea.getText().replaceAll("--","\r\n\r\n");
+						String fixedResult = SummarizationTextArea.getText().replaceAll("--", "\r\n\r\n");
 						String fixedResult2 = fixedResult.replace("[", "");
-						fixedResult = fixedResult2.replace("]","");
+						fixedResult = fixedResult2.replace("]", "");
 						SummarizationTextArea.setText(fixedResult);
-						
-						for(int i = 0; i < SMF.counter.length; i++) {
+
+						for (int i = 0; i < SMF.counter.length; i++) {
 							SMF.counter[i] = 0;
 						}
 					}
@@ -222,6 +226,7 @@ public class Main extends JFrame {
 		btnSummarization.setFont(new Font("Serif", Font.PLAIN, 17));
 
 		JButton btnFileRead = new JButton("Dosyadan Oku");
+		btnFileRead.setVisible(false);
 		btnFileRead.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FileReadClick = true;
@@ -235,16 +240,16 @@ public class Main extends JFrame {
 				fileChooser.showOpenDialog(fileChooser);
 				f = fileChooser.getSelectedFile();
 				if (f != null) {
-				path = f.getAbsolutePath();
+					path = f.getAbsolutePath();
 
-				try {
-					String txt = temp.FileRead(path);
-					String txt2=txt.replaceAll(", , ","\r\n\r\n");
-					OrjinalTextArea.append(txt2);
+					try {
+						String txt = temp.FileRead(path);
+						String txt2 = txt.replaceAll(", , ", "\r\n\r\n");
+						OrjinalTextArea.append(txt2);
 
-				} catch (IOException e1) { 
-					e1.printStackTrace();
-				}
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -299,4 +304,3 @@ public class Main extends JFrame {
 
 	}
 }
-
