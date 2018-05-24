@@ -13,7 +13,7 @@ import zemberek.tokenization.TurkishSentenceExtractor;
 
 
 public class SummarizingTxt {
-	private int[] counter = new int[100];
+	public int[] counter = new int[100];
 	private String[] PositiveWords = { "özetle", "sonuçta", "kısaca", "kısacası", "sonuç olarak", "neticede",
 			"en önemlisi" };
 	private String[] stopWords = { "acaba", "ama", "ancak", "artık", "asla", "aslında", "az", "altmış", "altı", "arada",
@@ -66,7 +66,7 @@ public class SummarizingTxt {
 		String firstParagraphSentence = null, lastParagraphSentence;
 
 		paragraph = Sentence.split("(\n\n)");
-		SentenceCount = Sentence.split("(\\.)|(\\n\\n)");
+		SentenceCount = Sentence.split("(\\. )|(\\n\\n)");
 
 		ArrayList<String> Str = new ArrayList<String>();
 
@@ -111,7 +111,7 @@ public class SummarizingTxt {
 		// olarak kabul ediyorum
 
 		String[] title = str[0][0].split("\n\n");// ilk cumle aliniyor
-		str[0][0] = title[1];
+		str[0][0] = title[0];
 		String[] titleWords = title[0].split(" ");// cumle kelimelerine ayrılıyor
 
 		try {
